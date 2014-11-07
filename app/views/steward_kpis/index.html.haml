@@ -1,12 +1,13 @@
 %h1 Listing steward_kpis
 
-%table
+- if @parent_id
+  - @parent.path.each do |sk|
+    = link_to sk.resource, steward_kpis_path(parent_id: sk.id)
+    >
+%table.table.table-bordered
   %tr
-    %th Code
     %th Resource
-    %th Code type
-    %th Query plan
-    %th Position
+    %th Code
     %th Ancestry
     %th
     %th
@@ -14,11 +15,8 @@
 
   - @steward_kpis.each do |steward_kpi|
     %tr
-      %td= steward_kpi.code
-      %td= steward_kpi.resource
-      %td= steward_kpi.code_type
-      %td= steward_kpi.query_plan
-      %td= steward_kpi.position
+      %td= link_to steward_kpi.resource, steward_kpis_path(parent_id: steward_kpi.id)
+      %td= raw steward_kpi.code
       %td= steward_kpi.ancestry
       %td= link_to 'Show', steward_kpi
       %td= link_to 'Edit', edit_steward_kpi_path(steward_kpi)
@@ -26,4 +24,4 @@
 
 %br
 
-= link_to 'New Steward kpi', new_steward_kpi_path
+= link_to 'New Steward kpi', new_steward_kpi_path(parent_id: @parent_id)

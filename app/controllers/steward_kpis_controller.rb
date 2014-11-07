@@ -1,20 +1,22 @@
 class StewardKpisController < ApplicationController
-  before_action :set_steward_kpi, only: [:show, :edit, :update, :destroy]
+  before_action :set_steward_kpi, only: [:edit, :update, :destroy]
 
   # GET /steward_kpis
   # GET /steward_kpis.json
   def index
-    @steward_kpis = StewardKpi.all
-  end
-
-  # GET /steward_kpis/1
-  # GET /steward_kpis/1.json
-  def show
+    if params[:parent_id]
+      @steward_kpis = StewardKpi.find(params[:parent_id]).children
+      @parent_id = params[:parent_id]
+      @parent = StewardKpi.find(params[:parent_id])
+    else
+      @steward_kpis = StewardKpi.all_roots
+    end
   end
 
   # GET /steward_kpis/new
   def new
-    @steward_kpi = StewardKpi.new
+    @steward_kpi = StewardKpi.new()
+    @parent_id = params[:parent_id]
   end
 
   # GET /steward_kpis/1/edit
@@ -24,11 +26,16 @@ class StewardKpisController < ApplicationController
   # POST /steward_kpis
   # POST /steward_kpis.json
   def create
-    @steward_kpi = StewardKpi.new(steward_kpi_params)
+    if params[:steward_kpi]
+      steward_kpi = StewardKpi.find(params[:steward_kpi][:parent_id]).children
+    else
+      steward_kpi = StewardKpi
+    end
+    @steward_kpi = steward_kpi.new(steward_kpi_params)
 
     respond_to do |format|
       if @steward_kpi.save
-        format.html { redirect_to @steward_kpi, notice: 'Steward kpi was successfully created.' }
+        format.html { redirect_to steward_kpis_path(parent_id: @steward_kpi.parent_id), notice: 'Steward kpi was successfully created.' }
         format.json { render :show, status: :created, location: @steward_kpi }
       else
         format.html { render :new }
@@ -42,7 +49,7 @@ class StewardKpisController < ApplicationController
   def update
     respond_to do |format|
       if @steward_kpi.update(steward_kpi_params)
-        format.html { redirect_to @steward_kpi, notice: 'Steward kpi was successfully updated.' }
+        format.html { redirect_to steward_kpis_path, notice: 'Steward kpi was successfully updated.' }
         format.json { render :show, status: :ok, location: @steward_kpi }
       else
         format.html { render :edit }

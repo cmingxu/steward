@@ -10,5 +10,7 @@ class CreateStewardKpis < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :steward_kpis, :ancestry
   end
 end
