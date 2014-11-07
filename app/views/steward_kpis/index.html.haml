@@ -1,0 +1,29 @@
+%h1 Listing steward_kpis
+
+%table
+  %tr
+    %th Code
+    %th Resource
+    %th Code type
+    %th Query plan
+    %th Position
+    %th Ancestry
+    %th
+    %th
+    %th
+
+  - @steward_kpis.each do |steward_kpi|
+    %tr
+      %td= steward_kpi.code
+      %td= steward_kpi.resource
+      %td= steward_kpi.code_type
+      %td= steward_kpi.query_plan
+      %td= steward_kpi.position
+      %td= steward_kpi.ancestry
+      %td= link_to 'Show', steward_kpi
+      %td= link_to 'Edit', edit_steward_kpi_path(steward_kpi)
+      %td= link_to 'Destroy', steward_kpi, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Steward kpi', new_steward_kpi_path

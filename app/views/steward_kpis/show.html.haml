@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @steward_kpi.code
+%p
+  %b Resource:
+  = @steward_kpi.resource
+%p
+  %b Code type:
+  = @steward_kpi.code_type
+%p
+  %b Query plan:
+  = @steward_kpi.query_plan
+%p
+  %b Position:
+  = @steward_kpi.position
+%p
+  %b Ancestry:
+  = @steward_kpi.ancestry
+
+= link_to 'Edit', edit_steward_kpi_path(@steward_kpi)
+\|
+= link_to 'Back', steward_kpis_path
