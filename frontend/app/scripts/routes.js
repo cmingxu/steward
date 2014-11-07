@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-angular.module('frontendApp', ['ui.router'])
+angular.module('frontendApp')
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('main', {
@@ -24,4 +24,6 @@ angular.module('frontendApp', ['ui.router'])
   });
 
   $urlRouterProvider.otherwise('/');
+
+  console.log("Finish Loading Routes.")
 })

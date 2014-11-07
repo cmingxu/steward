@@ -8,8 +8,9 @@
  *
  * Main module of the application.
  */
+console.log("starting app.js")
 angular
-  .module('frontendApp', ['ngAnimate', 'ngCookies', 'ngResource', 'ngSanitize', 'ngTouch'])
+  .module('frontendApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router'])
   .run(function($rootScope) {
     $rootScope.mainViewLayout = [
         {
@@ -22,4 +23,8 @@ angular
             ]
         },
     ];
+    $rootScope.menuIndex = [0, 0];
+
+    console.log($rootScope);
+    console.log("Finish app.js")
   });

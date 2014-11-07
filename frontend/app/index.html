@@ -24,14 +24,20 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li ng-repeat="menu in mainViewLayout">
+          <li ng-repeat="menu in mainViewLayout" ng-class="{ active: $index == menuIndex[0] }">
             <a href="#">{{menu.name}}</a>
           </li>
         </ul>
         <h3 class="text-muted">frontend</h3>
       </div>
 
-      <div ng-view=""></div>
+      <div class="sidebar">
+        <ul class="list-group">
+          <a ng-repeat="item in mainViewLayout[menuIndex[0]].sidebar" class="list-group-item" ng-class="{ active: $index == menuIndex[1] }" href="#">{{item.name}}</a>
+        </ul>
+      </div>
+
+      <div ui-view=""></div>
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
@@ -77,8 +83,6 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/d3/d3.js"></script>
     <script src="bower_components/c3/c3.js"></script>

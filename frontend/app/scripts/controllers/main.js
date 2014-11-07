@@ -9,4 +9,5 @@
  */
 angular.module('frontendApp')
   .controller('MainCtrl', function ($scope, $rootScope) {
+    console.log("Main control");
   });
