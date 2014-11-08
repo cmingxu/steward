@@ -4,7 +4,7 @@ class StewardKpisController < ApplicationController
   # GET /steward_kpis
   # GET /steward_kpis.json
   def index
-    if params[:parent_id]
+    if params[:parent_id].present?
       @steward_kpis = StewardKpi.find(params[:parent_id]).children
       @parent_id = params[:parent_id]
       @parent = StewardKpi.find(params[:parent_id])
@@ -26,7 +26,7 @@ class StewardKpisController < ApplicationController
   # POST /steward_kpis
   # POST /steward_kpis.json
   def create
-    if params[:steward_kpi]
+    if params[:steward_kpi][:parent_id].present?
       steward_kpi = StewardKpi.find(params[:steward_kpi][:parent_id]).children
     else
       steward_kpi = StewardKpi

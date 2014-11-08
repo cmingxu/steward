@@ -1,0 +1,12 @@
+= simple_form_for(@steward_page_widget) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :widget_type
+    = f.input :label
+    = f.input :options
+    = f.association :steward_kpi
+    = f.input :param
+
+  .form-actions
+    = f.button :submit

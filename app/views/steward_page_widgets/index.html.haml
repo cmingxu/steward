@@ -1,0 +1,27 @@
+%h1 Listing steward_page_widgets
+
+%table
+  %tr
+    %th Widget type
+    %th Label
+    %th Options
+    %th Steward kpi
+    %th Param
+    %th
+    %th
+    %th
+
+  - @steward_page_widgets.each do |steward_page_widget|
+    %tr
+      %td= steward_page_widget.widget_type
+      %td= steward_page_widget.label
+      %td= steward_page_widget.options
+      %td= steward_page_widget.steward_kpi
+      %td= steward_page_widget.param
+      %td= link_to 'Show', steward_page_widget
+      %td= link_to 'Edit', edit_steward_page_widget_path(steward_page_widget)
+      %td= link_to 'Destroy', steward_page_widget, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Steward page widget', new_steward_page_widget_path

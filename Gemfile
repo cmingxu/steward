@@ -1,6 +1,8 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org/'
 ruby '2.1.2'
+
 gem 'rails', '4.1.4'
+gem 'sqlite3'
 gem 'mysql2'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -15,6 +17,8 @@ gem 'haml-rails'
 gem 'high_voltage'
 gem 'ancestry'
 gem 'simple_form'
+gem "nested_form"
+gem 'annotate'
 
 group :development do
   gem 'better_errors'

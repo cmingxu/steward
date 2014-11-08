@@ -1,0 +1,2 @@
+module StewardPageWidgetsHelper
+end

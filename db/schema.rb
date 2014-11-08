@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107121107) do
+ActiveRecord::Schema.define(version: 20141108064758) do
 
   create_table "steward_kpis", force: true do |t|
     t.text     "code"
@@ -24,15 +24,18 @@ ActiveRecord::Schema.define(version: 20141107121107) do
     t.datetime "updated_at"
   end
 
-  add_index "steward_kpis", ["ancestry"], name: "index_steward_kpis_on_ancestry", using: :btree
+  add_index "steward_kpis", ["ancestry"], name: "index_steward_kpis_on_ancestry"
 
   create_table "steward_page_widgets", force: true do |t|
     t.integer  "widget_type"
     t.string   "label"
     t.text     "options"
     t.integer  "steward_kpi_id"
+    t.string   "param"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "steward_page_widgets", ["steward_kpi_id"], name: "index_steward_page_widgets_on_steward_kpi_id"
 
 end

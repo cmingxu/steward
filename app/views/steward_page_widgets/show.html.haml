@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Widget type:
+  = @steward_page_widget.widget_type
+%p
+  %b Label:
+  = @steward_page_widget.label
+%p
+  %b Options:
+  = @steward_page_widget.options
+%p
+  %b Steward kpi:
+  = @steward_page_widget.steward_kpi
+%p
+  %b Param:
+  = @steward_page_widget.param
+
+= link_to 'Edit', edit_steward_page_widget_path(@steward_page_widget)
+\|
+= link_to 'Back', steward_page_widgets_path

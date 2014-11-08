@@ -12,13 +12,8 @@
 #  updated_at     :datetime
 #
 
-FactoryGirl.define do
-  factory :steward_page_widget do
-    widget_type 1
-label "MyString"
-options "MyText"
-steward_kpi nil
-param "MyString"
-  end
+require 'rails_helper'
 
+RSpec.describe StewardPageWidget, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

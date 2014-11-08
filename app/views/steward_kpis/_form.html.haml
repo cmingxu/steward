@@ -1,8 +1,18 @@
-= simple_form_for(@steward_kpi, html: {class: 'form-horizontal' }) do |f|
-  .form-inputs
-    = f.input :parent_id, :as => :hidden, :input_html => { :value => @parent_id }
-    = f.input :code, :required => false, :autofocus => true
-    = f.input :position, :required => false
-    = f.input :resource, :required => false
-  .form-actions
-    = f.button :submit, "Save"
+= simple_nested_form_for @steward_kpi, html: { class: 'form-horizontal' } do |f|
+  = f.input :parent_id, :as => :hidden, :input_html => { :value => @parent_id }
+  = f.input :code, :required => false, :autofocus => true
+  = f.input :position, :required => false
+  = f.input :resource, :required => false
+
+  = f.fields_for :steward_page_widgets do |spw_form|
+    = spw_form.input :label
+    = spw_form.input :options
+    = spw_form.input :widget_type
+    = spw_form.input :param
+    = spw_form.link_to_remove "Remove this task"
+    %hr
+  %p
+    = f.link_to_add "Add a page widget", :steward_page_widgets
+
+  = f.button :submit, "Save"
+

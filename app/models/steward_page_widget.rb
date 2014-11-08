@@ -12,13 +12,7 @@
 #  updated_at     :datetime
 #
 
-FactoryGirl.define do
-  factory :steward_page_widget do
-    widget_type 1
-label "MyString"
-options "MyText"
-steward_kpi nil
-param "MyString"
-  end
-
+class StewardPageWidget < ActiveRecord::Base
+  serialize :parties
+  belongs_to :steward_kpi
 end
