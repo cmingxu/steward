@@ -10,20 +10,21 @@
  */
 console.log("starting app.js")
 angular
-  .module('frontendApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router'])
-  .run(function($rootScope) {
-    $rootScope.mainViewLayout = [
+  .module('frontendApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'angularBootstrapNavTree'])
+  .run(function($rootScope, $http) {
+    $rootScope.navData = [
         {
-            'name': 'User',
-            'sidebar': [
+            'label': 'User',
+            'children': [
                 {
-                    'name': 'DAU',
-                    'url': '/dau'
+                    'label': 'DAU',
+                    'children': [
+                        'test1', 'test2', 'test3'
+                    ]
                 },
             ]
         },
     ];
-    $rootScope.menuIndex = [0, 0];
 
     console.log($rootScope);
     console.log("Finish app.js")
