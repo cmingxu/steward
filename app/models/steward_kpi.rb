@@ -23,5 +23,24 @@ class StewardKpi < ActiveRecord::Base
 
   default_scope { order(:position) }
 
-  scope :all_roots, -> { where(:ancestry => nil) }
+  def self.to_nav_tree
+    [].tap do |nav_tree|
+      self.roots.each do |r|
+        subtree = { label: r.resource }
+        self.depth_first_iteration(r, subtree)
+        nav_tree << subtree
+      end
+    end
+  end
+
+  def self.depth_first_iteration(node, hash)
+    return unless node.has_children?
+    node.children.each do |c|
+      subtree = { label: c.resource }
+      hash[:children] ||= []
+      hash[:children] << subtree
+      self.depth_first_iteration(c, subtree)
+    end
+  end
+
 end

@@ -9,7 +9,7 @@ class StewardKpisController < ApplicationController
       @parent_id = params[:parent_id]
       @parent = StewardKpi.find(params[:parent_id])
     else
-      @steward_kpis = StewardKpi.all_roots
+      @steward_kpis = StewardKpi.roots
     end
   end
 
