@@ -7,7 +7,7 @@
   = f.fields_for :steward_page_widgets do |spw_form|
     = spw_form.input :label
     = spw_form.input :options
-    = spw_form.input :widget_type
+    = spw_form.input :widget_type, as: :select, collection: StewardPageWidget.widget_types.keys
     = spw_form.input :param
     = spw_form.link_to_remove "Remove this task"
     %hr

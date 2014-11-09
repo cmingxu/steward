@@ -36,7 +36,18 @@ class StewardKpi < ActiveRecord::Base
   def self.depth_first_iteration(node, hash)
     return unless node.has_children?
     node.children.each do |c|
-      subtree = { label: c.resource }
+
+      subtree = { label: c.resource, data: { url: "test" } }
+      unless c.has_children?
+        subtree[:data][:controls] = c.steward_page_widgets.map do |spw|
+          {
+            label: spw.label,
+            type: spw.widget_type,
+            options: spw.options,
+            param_name: spw.param
+          }
+        end
+      end
       hash[:children] ||= []
       hash[:children] << subtree
       self.depth_first_iteration(c, subtree)

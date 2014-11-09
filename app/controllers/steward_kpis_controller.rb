@@ -76,6 +76,7 @@ class StewardKpisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def steward_kpi_params
-      params.require(:steward_kpi).permit(:code, :resource, :code_type, :query_plan, :position, :ancestry)
+      params.require(:steward_kpi).permit(:code, :resource, :code_type, :query_plan, :position, :ancestry,
+        steward_page_widgets_attributes: [:widget_type, :label, :options, :param])
     end
 end

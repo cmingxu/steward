@@ -13,6 +13,6 @@
 #
 
 class StewardPageWidget < ActiveRecord::Base
-  serialize :parties
   belongs_to :steward_kpi
+  enum widget_type: [:dropdown, :text, :radio, :checkbox]
 end
