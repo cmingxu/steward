@@ -37,14 +37,14 @@ class StewardKpi < ActiveRecord::Base
     return unless node.has_children?
     node.children.each do |c|
 
-      subtree = { label: c.resource, data: { url: "test" } }
+      subtree = { label: c.resource, data: { url: "http://localhost:3000/steward_kpis/#{c.id}" } }
       unless c.has_children?
         subtree[:data][:controls] = c.steward_page_widgets.map do |spw|
           {
             label: spw.label,
             type: spw.widget_type,
-            options: spw.options,
-            param_name: spw.param
+            options: spw.options.split(', ').map{|h| h1,h2 = h.split(':'); {h1.strip => h2.strip}}.reduce(:merge),
+            name: spw.name
           }
         end
       end
@@ -52,6 +52,9 @@ class StewardKpi < ActiveRecord::Base
       hash[:children] << subtree
       self.depth_first_iteration(c, subtree)
     end
+  end
+
+  def query_kpi_data(query_params)
   end
 
 end

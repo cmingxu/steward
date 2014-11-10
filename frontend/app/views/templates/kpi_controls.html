@@ -2,9 +2,9 @@
     <div class="form-group" ng-repeat="control in controlsData">
         <label for="{{control.name}}">{{control.name}}</label>
         <input type="text" class="form-control" name="{{control.name}}" ng-if="control.type=='text'" ng-model='kpiQueryParams[control.name]'>
-        <select class="form-control" ng-if="control.type=='dropdown'">
-            <option value="option.value" ng-repeat='option in control.options'>option.label</option>
+        <select class="form-control" ng-if="control.type=='dropdown'" ng-model='kpiQueryParams[control.name]'>
+            <option value="{{value}}" ng-repeat='(label, value) in control.options'>{{label}}</option>
         </select>
-        <button ng-click="queryKpi()" class='btn btn-info'>Submit</button>
     </div>
+    <button ng-click="queryKpi()" class='btn btn-info'>Submit</button>
 </div>

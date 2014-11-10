@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108064758) do
+ActiveRecord::Schema.define(version: 20141110065330) do
 
   create_table "steward_kpis", force: true do |t|
     t.text     "code"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20141108064758) do
     t.string   "label"
     t.text     "options"
     t.integer  "steward_kpi_id"
-    t.string   "param"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

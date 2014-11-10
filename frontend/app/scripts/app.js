@@ -22,7 +22,8 @@ angular
     $rootScope.navTreeSelectHandler = function(branch) {
         $rootScope.pageTitle = branch.label
         if(branch.children.length == 0) {
-          $rootScope.kpiControlsData = branch.data.controls
+          $rootScope.kpiControlsData = branch.data.controls;
+          $rootScope.kpiQueryUrl = branch.data.url;
         }
         console.log(branch.label)
         console.log(branch.data);

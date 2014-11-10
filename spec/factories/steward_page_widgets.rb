@@ -7,7 +7,7 @@
 #  label          :string(255)
 #  options        :text
 #  steward_kpi_id :integer
-#  param          :string(255)
+#  name           :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
 #

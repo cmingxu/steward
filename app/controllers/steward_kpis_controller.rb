@@ -1,5 +1,5 @@
 class StewardKpisController < ApplicationController
-  before_action :set_steward_kpi, only: [:edit, :update, :destroy]
+  before_action :set_steward_kpi, only: [:edit, :update, :destroy, :show]
 
   # GET /steward_kpis
   # GET /steward_kpis.json
@@ -21,6 +21,10 @@ class StewardKpisController < ApplicationController
 
   # GET /steward_kpis/1/edit
   def edit
+  end
+
+  def show
+    render json: @steward_kpi.query_kpi_data(params[:query])
   end
 
   # POST /steward_kpis
@@ -49,7 +53,7 @@ class StewardKpisController < ApplicationController
   def update
     respond_to do |format|
       if @steward_kpi.update(steward_kpi_params)
-        format.html { redirect_to steward_kpis_path, notice: 'Steward kpi was successfully updated.' }
+        format.html { redirect_to steward_kpis_path(parent_id: @steward_kpi.parent_id), notice: 'Steward kpi was successfully updated.' }
         format.json { render :show, status: :ok, location: @steward_kpi }
       else
         format.html { render :edit }
@@ -77,6 +81,6 @@ class StewardKpisController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def steward_kpi_params
       params.require(:steward_kpi).permit(:code, :resource, :code_type, :query_plan, :position, :ancestry,
-        steward_page_widgets_attributes: [:widget_type, :label, :options, :param])
+        steward_page_widgets_attributes: [:id, :widget_type, :label, :options, :name, :_destroy])
     end
 end
