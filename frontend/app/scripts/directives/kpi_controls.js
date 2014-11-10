@@ -16,15 +16,17 @@
       queryUrl: '='
     },
     link: function postLink(scope, element, attrs) {
-      scope.kpiQueryParams = {}
+      scope.kpiQueryParams = {};
     },
     controller: function($scope, $http, $rootScope) {
       $scope.queryKpi = function() {
-        console.log("Query params:", $scope.kpiQueryParams)
-        $http.get($scope.queryUrl, { params: { query: $scope.kpiQueryParams } }).success(
-          function(data) {console.log(data) }
-          )
-      }
+        console.log("Query params:", $scope.kpiQueryParams);
+        $http.get($scope.queryUrl, { params: { query: $scope.kpiQueryParams } }).success(function(data) {
+          console.log(data);
+          $rootScope.kpiData = data;
+        });
+
+      };
     },
   };
 });
