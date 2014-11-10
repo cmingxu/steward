@@ -20,9 +20,14 @@ angular
         $rootScope.navData = data
     })
     $rootScope.navTreeSelectHandler = function(branch) {
+        $rootScope.pageTitle = branch.label
+        if(branch.children.length == 0) {
+          $rootScope.kpiControlsData = branch.data.controls
+        }
         console.log(branch.label)
         console.log(branch.data);
+        console.log(branch)
     }
     console.log($rootScope);
-    console.log("Finish app.js")
+    console.log("Finish app.js");
   });
