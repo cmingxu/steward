@@ -57,7 +57,7 @@ class StewardKpi < ActiveRecord::Base
   end
 
   def query_kpi_data(query_params)
-    return { label:['test', 'test', 'test'], datasets:[{label: "label 1", data: [2,3,4]}, {label: "label 2", data: [2,3,4]}]}
+    return { labels:['test', 'test', 'test'], datasets:[{label: "label 1", data: [2,3,4]}, {label: "label 2", data: [2,3,4]}]}
   end
 
   def is_kpi?
