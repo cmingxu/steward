@@ -7,19 +7,17 @@
 %table.table.table-bordered
   %tr
     %th Resource
-    %th Code
-    %th Ancestry
+    %th Type
     %th
     %th
 
   - @steward_kpis.each do |steward_kpi|
     %tr
-      %td= link_to steward_kpi.resource, steward_kpis_path(parent_id: steward_kpi.id)
-      %td= raw steward_kpi.code
-      %td= steward_kpi.ancestry
+      %td= link_to steward_kpi.resource, steward_kpi.has_children? ? steward_kpis_path(parent_id: steward_kpi.id) : edit_steward_kpi_path(steward_kpi)
+      %td= steward_kpi.has_children? ? 'Category' : 'KPI'
       %td= link_to 'Edit', edit_steward_kpi_path(steward_kpi)
       %td= link_to 'Destroy', steward_kpi, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Steward kpi', new_steward_kpi_path(parent_id: @parent_id)
+= link_to 'New Steward kpi', new_steward_kpi_path(parent_id: @parent_id), class: 'btn btn-success'

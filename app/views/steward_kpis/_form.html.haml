@@ -1,18 +1,28 @@
-= simple_nested_form_for @steward_kpi, html: { class: 'form-horizontal' } do |f|
+= simple_nested_form_for @steward_kpi do |f|
   = f.input :parent_id, :as => :hidden, :input_html => { :value => @parent_id }
-  = f.input :code, :required => false, :autofocus => true
-  = f.input :position, :required => false
-  = f.input :resource, :required => false
+  = f.input :resource, :required => true, :autofocus => true
+  = f.input :code, as: :text, :required => false
 
-  = f.fields_for :steward_page_widgets do |spw_form|
-    = spw_form.input :label
-    = spw_form.input :name
-    = spw_form.input :options
-    = spw_form.input :widget_type, as: :select, collection: StewardPageWidget.widget_types.keys
-    = spw_form.link_to_remove "Remove this task"
-    %hr
+  = f.fields_for :steward_page_widgets, html: { class: 'container' } do |spw_form|
+    .row
+      = spw_form.input :label, wrapper_html: { class: 'col-sm-6' }
+      = spw_form.input :name, wrapper_html: { class: 'col-sm-6' }
+    .row
+      = spw_form.input :options, wrapper_html: { class: 'col-sm-6' }
+      = spw_form.input :widget_type, as: :select, collection: StewardPageWidget.widget_types.keys, wrapper_html: { class: 'col-sm-6' }
+    = spw_form.link_to_remove "Remove this task", class: 'btn btn-danger btn-sm remove-control-btn pull-right'
+    .clearfix
   %p
-    = f.link_to_add "Add a page widget", :steward_page_widgets
+    = f.link_to_add "Add a page Control", :steward_page_widgets, class: 'btn btn-success'
 
-  = f.button :submit, "Save"
+  = f.button :submit, "Save", class: 'pull-left'
 
+:coffee
+  myCodeMirror = CodeMirror.fromTextArea $('#steward_kpi_code')[0],
+    lineNumbers: true
+    matchBrackets: true
+    theme: 'solarized light'
+    extraKeys:
+      Tab: (cm) ->
+        spaces = Array(cm.getOption("indentUnit") + 1).join("  ")
+        cm.replaceSelection(spaces, "end", "+input")
