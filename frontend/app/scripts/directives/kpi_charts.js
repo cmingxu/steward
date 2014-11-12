@@ -12,7 +12,7 @@
     templateUrl: 'views/templates/kpi_charts.html',
     restrict: 'E',
     scope: {
-      kpiData: '=',
+      kpiViewsData: '=',
       kpiChartType: '='
     }
   };

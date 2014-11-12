@@ -11,11 +11,13 @@
 #  ancestry   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  node_type  :integer
 #
 
 class StewardKpi < ActiveRecord::Base
   enum code_type: [:sql, :code]
   enum query_plan: [:realtime, :cached]
+  enum node_type: [:category, :kpi]
 
   has_ancestry
   has_many :steward_page_widgets
@@ -55,6 +57,11 @@ class StewardKpi < ActiveRecord::Base
   end
 
   def query_kpi_data(query_params)
+    return { label:['test', 'test', 'test'], datasets:[{label: "label 1", data: [2,3,4]}, {label: "label 2", data: [2,3,4]}]}
+  end
+
+  def is_kpi?
+    self.node_type.to_sym == :kpi
   end
 
 end

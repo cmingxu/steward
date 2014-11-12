@@ -23,7 +23,7 @@
         console.log("Query params:", $scope.kpiQueryParams);
         $http.get($scope.queryUrl, { params: { query: $scope.kpiQueryParams } }).success(function(data) {
           console.log(data);
-          $rootScope.kpiData = data;
+          $rootScope.kpiViewsData = data;
         });
 
       };

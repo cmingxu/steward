@@ -59,8 +59,6 @@ body
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px)
-  .container
-    max-width: 730px
   /* Remove the padding we set earlier */
   .header,
   .marketing,
@@ -69,14 +67,26 @@ body
     padding-right: 0
   /* Space out the masthead */
   .header
-    margin-bottom: 30px
+    margin-bottom: 5px
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron
     border-bottom: 0
-
 
 #sidebar
   position: fixed
   width: $sidebar-width
   left: 10px
   top: 30px
+
+#main
+  padding-left: $sidebar-width + 10px
+  .container
+    width: 100%
+
+.query-btn
+  position: absolute
+  right: 16px
+  margin-top: -60px
+
+
+

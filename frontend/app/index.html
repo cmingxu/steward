@@ -22,31 +22,33 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
+    <div id="main">
+      <div class="container">
+        <div class="header">
+          <ul class="nav nav-pills pull-right">
 
-        </ul>
-        <h3 class="text-muted">{{pageTitle || 'Steward'}}</h3>
-      </div>
+          </ul>
+          <h3 class="text-muted">{{pageTitle || 'Steward'}}</h3>
+        </div>
 
-      <div class="general-controls"></div>
+        <div class="general-controls"></div>
 
-      <div class="well" id="sidebar">
-        <abn-tree tree-data="navData"
-                  on-select= "navTreeSelectHandler(branch)"
-                  expand-level= "1">
-        </abn-tree>
-      </div>
+        <div class="well" id="sidebar">
+          <abn-tree tree-data="navData"
+                    on-select= "navTreeSelectHandler(branch)"
+                    expand-level= "1">
+          </abn-tree>
+        </div>
 
-      <div ui-view=""></div>
-      <div class="main-content">
-        <kpi-controls controls-data='kpiControlsData' query-url='kpiQueryUrl'></kpi-controls>
-        <kpi-charts views-data='kpiViewsData'></kpi-views>
-      </div>
+        <div ui-view=""></div>
+        <div class="main-content">
+          <kpi-controls controls-data='kpiControlsData' query-url='kpiQueryUrl'></kpi-controls>
+          <kpi-charts kpi-views-data='kpiViewsData'></kpi-charts>
+        </div>
 
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <div class="footer">
+          <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        </div>
       </div>
     </div>
 

@@ -11,6 +11,7 @@
 #  ancestry   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  node_type  :integer
 #
 
 FactoryGirl.define do

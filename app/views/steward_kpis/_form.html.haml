@@ -1,19 +1,31 @@
 = simple_nested_form_for @steward_kpi do |f|
   = f.input :parent_id, :as => :hidden, :input_html => { :value => @parent_id }
   = f.input :resource, :required => true, :autofocus => true
-  = f.input :code, as: :text, :required => false
 
-  = f.fields_for :steward_page_widgets, html: { class: 'container' } do |spw_form|
-    .row
-      = spw_form.input :label, wrapper_html: { class: 'col-sm-6' }
-      = spw_form.input :name, wrapper_html: { class: 'col-sm-6' }
-    .row
-      = spw_form.input :options, wrapper_html: { class: 'col-sm-6' }
-      = spw_form.input :widget_type, as: :select, collection: StewardPageWidget.widget_types.keys, wrapper_html: { class: 'col-sm-6' }
-    = spw_form.link_to_remove "Remove this task", class: 'btn btn-danger btn-sm remove-control-btn pull-right'
-    .clearfix
-  %p
-    = f.link_to_add "Add a page Control", :steward_page_widgets, class: 'btn btn-success'
+  - if @steward_kpi.new_record?
+    .btn-group.node-type{ "data-toggle" => "buttons" }
+      %label.btn.btn-default.active
+        %input{ 'type' => "radio", 'name' => "steward_kpi[node_type]", 'autocomplete' => "off", 'checked' => '', 'value' => 'kpi'}
+          KPI
+      %label.btn.btn-default
+        %input{ 'type' => "radio", 'name' => "steward_kpi[node_type]", 'autocomplete' => "off", 'value' => 'category'}
+          CATEGORY
+
+  - if @steward_kpi.new_record? or @steward_kpi.is_kpi?
+    #kpi-params-block
+      = f.input :code, as: :text, :required => false
+
+      = f.fields_for :steward_page_widgets, html: { class: 'container' } do |spw_form|
+        .row
+          = spw_form.input :label, wrapper_html: { class: 'col-sm-6' }
+          = spw_form.input :name, wrapper_html: { class: 'col-sm-6' }
+        .row
+          = spw_form.input :options, wrapper_html: { class: 'col-sm-6' }
+          = spw_form.input :widget_type, as: :select, collection: StewardPageWidget.widget_types.keys, wrapper_html: { class: 'col-sm-6' }
+        = spw_form.link_to_remove "Remove the control", class: 'btn btn-danger btn-sm remove-control-btn pull-right'
+        .clearfix
+      %p
+      = f.link_to_add "Add a page Control", :steward_page_widgets, class: 'btn btn-success add-control-btn'
 
   = f.button :submit, "Save", class: 'pull-left'
 

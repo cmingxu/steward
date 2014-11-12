@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110065330) do
+ActiveRecord::Schema.define(version: 20141112023055) do
 
   create_table "steward_kpis", force: true do |t|
     t.text     "code"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20141110065330) do
     t.string   "ancestry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "node_type"
   end
 
   add_index "steward_kpis", ["ancestry"], name: "index_steward_kpis_on_ancestry"
