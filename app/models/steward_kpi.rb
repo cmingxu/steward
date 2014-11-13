@@ -57,7 +57,12 @@ class StewardKpi < ActiveRecord::Base
   end
 
   def query_kpi_data(query_params)
-    return { labels:['test', 'test', 'test'], datasets:[{label: "label 1", data: [2,3,4]}, {label: "label 2", data: [2,3,4]}]}
+    results = Conn.query(self.code % query_params)
+    datasets = results.each(as: :array).map do |data, i|
+      {label: i, data: data}
+    end
+    return { labels: results.fields, datasets: datasets }
+    # return { labels:['test1', 'test2', 'test3'], datasets:[{label: "label 1", data: [3,3,4]}, {label: "label 2", data: [2,3,4]}]}
   end
 
   def is_kpi?

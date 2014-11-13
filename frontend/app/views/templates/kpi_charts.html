@@ -1,13 +1,14 @@
 <div id="kpi-charts" class="table">
+  <span></span>
   <table class='table'>
     <thead>
       <tr>
-        <th ng-repeat="label in kpiViewsData.labels">{{label}}</th>
+        <th ng-repeat="label in kpiViewsData.labels track by $index">{{label}}</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="dataset in kpiViewsData.datasets">
-        <td ng-repeat="d in dataset.data">{{d}}</td>
+        <td ng-repeat="d in dataset.data track by $index">{{d}}</td>
       </tr>
     </tbody>
   </table>

@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('frontendApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'angularBootstrapNavTree'])
+  .module('frontendApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'angularBootstrapNavTree', 'ngTable'])
   // .constant("NAV_TREE_URL", 'http://localhost:3000/nav_tree')
   .run(function($rootScope, $http) {
     $rootScope.navData = [];
