@@ -13,7 +13,7 @@
 
   - @steward_kpis.each do |steward_kpi|
     %tr
-      %td= link_to steward_kpi.resource, steward_kpi.has_children? ? steward_kpis_path(parent_id: steward_kpi.id) : edit_steward_kpi_path(steward_kpi)
+      %td= link_to steward_kpi.resource, steward_kpi.is_kpi? ? edit_steward_kpi_path(steward_kpi) : steward_kpis_path(parent_id: steward_kpi.id)
       %td= steward_kpi.has_children? ? 'Category' : 'KPI'
       %td= link_to 'Edit', edit_steward_kpi_path(steward_kpi)
       %td= link_to 'Destroy', steward_kpi, :method => :delete, :data => { :confirm => 'Are you sure?' }

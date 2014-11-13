@@ -24,7 +24,8 @@ class StewardKpisController < ApplicationController
   end
 
   def show
-    render json: @steward_kpi.query_kpi_data(params[:query])
+    print params
+    render json: @steward_kpi.query_kpi_data(params)
   end
 
   # POST /steward_kpis

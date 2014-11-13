@@ -33,8 +33,3 @@
   myCodeMirror = CodeMirror.fromTextArea $('#steward_kpi_code')[0],
     lineNumbers: true
     matchBrackets: true
-    theme: 'solarized light'
-    extraKeys:
-      Tab: (cm) ->
-        spaces = Array(cm.getOption("indentUnit") + 1).join("  ")
-        cm.replaceSelection(spaces, "end", "+input")
