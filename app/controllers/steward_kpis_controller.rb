@@ -1,5 +1,5 @@
 class StewardKpisController < ApplicationController
-  before_action :set_steward_kpi, only: [:edit, :update, :destroy, :show]
+  before_action :set_steward_kpi, only: [:edit, :update, :destroy, :show, :test_run]
 
   # GET /steward_kpis
   # GET /steward_kpis.json
@@ -25,6 +25,13 @@ class StewardKpisController < ApplicationController
 
   def show
     render json: @steward_kpi.query_kpi_data(JSON.parse(params[:query]).symbolize_keys)
+  end
+
+  def test_run
+    erorr, msg = @steward_kpi.test_run
+    respond_to do |format|
+      format.json { render :json => {msg: msg, erorr: erorr} }
+    end
   end
 
   # POST /steward_kpis

@@ -30,6 +30,10 @@
 
   = f.button :submit, "Save", class: 'pull-left'
 
+- if @steward_kpi.persisted?
+  = button_tag "Test Run", data: { url: test_run_steward_kpi_path(@steward_kpi) }, class: "btn btn-default", id: "test_run_btn"
+#test_run_info_area.well
+
 :coffee
   myCodeMirror = CodeMirror.fromTextArea $('#steward_kpi_code')[0],
     lineNumbers: true

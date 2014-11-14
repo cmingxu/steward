@@ -24,7 +24,7 @@ class StewardKpi < ActiveRecord::Base
   has_many :steward_page_widgets
   accepts_nested_attributes_for :steward_page_widgets, allow_destroy: true
 
-  default_scope { order(:position) }
+  #default_scope { order(:position) }
 
   def self.to_nav_tree
     [].tap do |nav_tree|
@@ -57,12 +57,28 @@ class StewardKpi < ActiveRecord::Base
     end
   end
 
+  def generate_plan(query_params)
+    self.code % query_params
+  end
+
+  def test_run
+    test_params = Hash.new(self.steward_page_widgets.map{|spw| [spw.label, spw.options.split(/\W+/)[0]]})
+    sql_statement = generate_plan(test_params)
+    begin
+      Conn.query(sql_statement.replace(/limit \d+/, "LIMIT 1"))
+      [true, "SQL statement:  [ #{sql_statement} ] passed"]
+    rescue Exception => e
+      [false,
+      "SQL statement:  [ #{sql_statement} ] Error:  "  + e.message]
+    end
+  end
+
   def query_kpi_data(query_params)
     logger.info query_params
     logger.info self.code
 
     data_labels = self.labels.split(', ')
-    results = Conn.query(self.code % query_params)
+    results = Conn.query(generate_plan(query_params))
     datasets = results.each(as: :array).each_with_index.map do |data, i|
       {label: data_labels[i], data: data}
     end
