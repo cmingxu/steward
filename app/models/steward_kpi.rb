@@ -12,6 +12,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  node_type  :integer
+#  labels     :text
 #
 
 class StewardKpi < ActiveRecord::Base
@@ -57,14 +58,13 @@ class StewardKpi < ActiveRecord::Base
   end
 
   def query_kpi_data(query_params)
-    p "=========================="
-    p query_params
-    p self.code
-    p "=========================="
+    logger.info query_params
+    logger.info self.code
 
+    data_labels = self.labels.split(', ')
     results = Conn.query(self.code % query_params)
     datasets = results.each(as: :array).each_with_index.map do |data, i|
-      {label: i, data: data}
+      {label: data_labels[i], data: data}
     end
     return { labels: results.fields, datasets: datasets }
     # return { labels:['test1', 'test2', 'test3'], datasets:[{label: "label 1", data: [3,3,4]}, {label: "label 2", data: [2,3,4]}]}

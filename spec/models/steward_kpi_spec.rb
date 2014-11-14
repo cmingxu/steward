@@ -12,6 +12,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  node_type  :integer
+#  labels     :text
 #
 
 require 'rails_helper'

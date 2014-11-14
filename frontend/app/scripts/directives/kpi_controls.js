@@ -21,7 +21,7 @@
     controller: function($scope, $http, $rootScope) {
       $scope.queryKpi = function() {
         console.log("Query params:", $scope.kpiQueryParams);
-        $http.get($scope.queryUrl, { query: $scope.kpiQueryParams }).success(function(data) {
+        $http.get($scope.queryUrl, { params: { query: $scope.kpiQueryParams } }).success(function(data) {
           console.log(data);
           $rootScope.kpiViewsData = data;
         });

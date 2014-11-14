@@ -24,8 +24,7 @@ class StewardKpisController < ApplicationController
   end
 
   def show
-    print params
-    render json: @steward_kpi.query_kpi_data(params)
+    render json: @steward_kpi.query_kpi_data(JSON.parse(params[:query]).symbolize_keys)
   end
 
   # POST /steward_kpis
@@ -81,7 +80,7 @@ class StewardKpisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def steward_kpi_params
-      params.require(:steward_kpi).permit(:code, :resource, :code_type, :query_plan, :position, :ancestry, :node_type,
+      params.require(:steward_kpi).permit(:code, :resource, :code_type, :query_plan, :position, :ancestry, :node_type, :labels,
         steward_page_widgets_attributes: [:id, :widget_type, :label, :options, :name, :_destroy])
     end
 end

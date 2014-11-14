@@ -13,6 +13,7 @@
 
   - if @steward_kpi.new_record? or @steward_kpi.is_kpi?
     #kpi-params-block
+      = f.input :labels, :required => false
       = f.input :code, as: :text, :required => false
 
       = f.fields_for :steward_page_widgets, html: { class: 'container' } do |spw_form|
