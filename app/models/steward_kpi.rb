@@ -62,14 +62,18 @@ class StewardKpi < ActiveRecord::Base
   end
 
   def test_run
-    test_params = Hash.new(self.steward_page_widgets.map{|spw| [spw.label, spw.options.split(/\W+/)[0]]})
-    sql_statement = generate_plan(test_params)
+    test_params = Hash[*self.steward_page_widgets.map{|spw| [spw.label, spw.options.split(/\W+/)[0]]}.flatten]
+    test_params.symbolize_keys!
     begin
-      Conn.query(sql_statement.replace(/limit \d+/, "LIMIT 1"))
-      [true, "SQL statement:  [ #{sql_statement} ] passed"]
+      sql_statement = generate_plan(test_params)
+      res = Conn.query(sql_statement.sub(/limit \d+/, "LIMIT 1"))
+      [true, "SQL statement:  [ #{sql_statement} ] passed, results are [#{res.inspect}]"]
+    rescue Mysql2::Error => e
+      [false,
+       "SQL Error:  [ #{sql_statement} ] Error:  "  + e.message]
     rescue Exception => e
       [false,
-      "SQL statement:  [ #{sql_statement} ] Error:  "  + e.message]
+       "Error:  "  + e.message]
     end
   end
 

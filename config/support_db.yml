@@ -1,10 +1,10 @@
 development:
   adapter: mysql2
-  host: "118.192.87.139"
+  host: "localhost"
   encoding: utf8
   reconnect: true
-  database: support
+  database: doam_dev_cross_realm
   pool: 5
   username: root
-  password: 123321
+  password:
   socket: /tmp/mysql.sock
