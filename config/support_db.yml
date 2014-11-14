@@ -2,7 +2,7 @@ development:
   adapter: mysql2
   host: "118.192.87.139"
   encoding: utf8
-  reconnect: false
+  reconnect: true
   database: support
   pool: 5
   username: root
